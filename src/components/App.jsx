@@ -8,7 +8,6 @@ import { Statistics } from './Statistics/Statistics'
 
 export const App = (
   // for props
-
 ) => {
 
   // const [option, setOption] = useState(() => {
@@ -27,22 +26,31 @@ export const App = (
   //   bad: 0
   // };    
 
-  const handleFeedback = (option) => {
+  const handleFeedback = (name) => {
     
-
-
-
+    switch (name) {
+      case "good": {
+        setGood(prevState => prevState +1);
+        return
+      }
+      case "neutral": {
+        setNeutral(prevState => prevState +1);
+        return
+      }
+      case "bad": {
+        setBad(prevState => prevState +1);
+        return
+      }  
+    }
       // this.setState((prevState) => {
       // return {
       //     [option]: prevState[option] +1,
       // }
       // })
-  
-  };
+    };
 
   const countTotalFeedback = () => {
       let total = (good + bad + neutral);
-      //console.log(total)
       return total
   }
 
@@ -58,7 +66,7 @@ export const App = (
     <Section title="Please leave feedback"> 
       <Feedback
         option={Object.keys(option)}
-        onLeaveFeedback={Feedback}
+        handleFeedback={handleFeedback}
       />  
       </Section>
         
@@ -67,8 +75,6 @@ export const App = (
 
       <Section title = "Statistics">  
         <Statistics
-          //state={this.state }
-          //option = {optionData}
           good={good}
           neutral={neutral}
           bad={bad}
